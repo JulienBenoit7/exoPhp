@@ -11,5 +11,7 @@
       "email": "wilder@email.com"
     }
   ],
-  "require": {}
+  "require": {
+    "gipetto/cowsay": "^1.2"
+  }
 }
