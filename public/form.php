@@ -1,36 +1,3 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $uploadDir = 'public/uploads/';
-
-    $tmpName = $_FILES['avatar']['tmp_name'];
-
-    $maxFileSize = 1000000;
-    if ($_FILES['avatar']['size'] > $maxFileSize) {
-        $errors[] = 'Votre fichier doit faire moins de 2M';
-    }
-
-    $authorizedExtensions = ['jpg', 'gif', 'png', 'webp'];
-    $extension = pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
-
-    if (!in_array($extension, $authorizedExtensions)) {
-        $errors[] = 'Veuillez sélectionner une image de type jpg ou jpeg ou png.';
-    }
-    if (empty($errors)) {
-        $uniqueName = uniqid('image_') . '.' . $extension;
-
-        $uploadFile = $uploadDir . $uniqueName;
-
-        if (move_uploaded_file($tmpName, $uploadFile)) {
-            echo "L'upload de l'image a été réalisé avec succès.";
-
-        } else {
-            $errors[] = "Une erreur est survenue lors de l'upload de l'image.";
-
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -38,14 +5,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-    <form method="post" enctype="multipart/form-data">
-        <label for="imageUpload">Sélectionnez votre image :</label>
-        <input type="file" name="avatar" id="imageUpload" />
-        <button type="submit">Envoyer</button>
+    <form action="/thanks.php" method="post">
+        <div>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="user_name">
+        </div>
+        <div>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="user_firstName">
+        </div>
+        <div>
+            <label for="courriel">Courriel :</label>
+            <input type="email" id="user_email" name="user_email">
+        </div>
+        <div>
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        <div>
+            <select name="selectReason" id="selectReason">
+                <option name="">Merci de choisir un sujet</option>
+                <option name="internet">Plus de réseau</option>
+                <option name="tele">Plus de télévision</option>
+                <option name="phoneFix">Plus de téléphone</option>
+                <option name="communication">Problème de communication</option>
+                <option name="other">Autre</option>
+            </select>
+        </div>
+        <div>
+            <label for="message">Message :</label>
+            <textarea id="message" name="user_message"></textarea>
+        </div>
+        <div class="button">
+            <button type="submit">Envoyer votre message</button>
+        </div>
     </form>
+    <?php
+    var_dump($_POST);
+
+    ?>
 </body>
 
 </html>
