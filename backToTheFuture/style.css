@@ -1,0 +1,32 @@
+body {
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  width: max-content;
+  margin: 3em auto;
+  background-color: #333;
+  padding: 1em;
+}
+
+h1 {
+  color: #fff;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.time {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.time p {
+  margin: 0;
+}
+
+.time span {
+  color: #ffcc00;
+}
